@@ -87,7 +87,10 @@ export default withMermaid(
       outline: { level: [2, 3], label: '本章目录' },
       docFooter: { prev: '上一章', next: '下一章' },
       lastUpdated: { text: '更新于' },
-      editLink: { text: '在 GitHub 上编辑此页' },
+      editLink: {
+        text: '在 GitHub 上编辑此页',
+        pattern: 'https://github.com/anghunk/deepSeek-harness-docs/edit/main/:path',
+      },
       search: {
         provider: 'local',
         options: {

@@ -34,3 +34,5 @@ features:
 - **第五部分 · 插件开发技巧**：开发基础、实战模式、动态插件工作流、最佳实践
 
 > 本书对应源码版本：`deepseek-harness` 仓库 `0.1.0-rc.5/rc.6`（developer preview）。项目迭代迅速，存在破坏性变更，请以最新源码为准。
+
+> 本书 Markdown 源文件托管在 GitHub：[anghunk/deepSeek-harness-docs](https://github.com/anghunk/deepSeek-harness-docs)，欢迎指正与参与修订。
