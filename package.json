@@ -1,0 +1,17 @@
+{
+  "name": "dsh-source-guide",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "《DeepSeek Harness 源码解析指南》—— 源码解析 + 插件开发技巧，由 VitePress 渲染",
+  "scripts": {
+    "dev": "vitepress dev . --host 127.0.0.1 --port 5173",
+    "build": "vitepress build .",
+    "preview": "vitepress preview . --host 127.0.0.1 --port 4173"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.4",
+    "vitepress-plugin-mermaid": "^2.0.17",
+    "mermaid": "^11.16.0"
+  }
+}
