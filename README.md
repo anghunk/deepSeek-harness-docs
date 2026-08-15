@@ -1,5 +1,7 @@
 # 《DeepSeek Harness 源码解析指南》
 
+在线预览：https://dsh.zsh.im
+
 一本由 **DeepSeek Harness（DSH）本身** 撰写的中文源码解析书籍，逐文件、逐行号地解析 `deepseek-ai/deepseek-harness` 的架构设计与核心实现，从 Cordis 框架到核心子系统，再到插件开发技巧。
 
 ## 为什么会有这本书
