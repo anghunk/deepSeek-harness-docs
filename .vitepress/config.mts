@@ -107,10 +107,10 @@ export default withMermaid(
       nav: [
         { text: '首页', link: '/' },
         { text: '目录', link: '/preface' },
-        // 默认打开最新一天的记录；无记录时回退到索引页
-        { text: '变更记录', link: changelogItems.length ? changelogItems[0].link : '/changelog/' },
         { text: 'DeepSeek Harness 源码', link: 'https://github.com/deepseek-ai/deepseek-harness' },
         { text: '文档仓库', link: 'https://github.com/anghunk/deepSeek-harness-docs' },
+        // 默认打开最新一天的记录；无记录时回退到索引页
+        { text: '变更记录', link: changelogItems.length ? changelogItems[0].link : '/changelog/' },
       ],
       // 路径前缀切换侧边栏：变更记录区显示日期目录，其余保持书籍侧边栏
       sidebar: {
