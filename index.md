@@ -9,8 +9,11 @@ hero:
       text: 开始阅读
       link: /preface
     - theme: alt
-      text: GitHub 仓库
+      text: DeepSeek Harness 源码
       link: https://github.com/deepseek-ai/deepseek-harness
+    - theme: alt
+      text: 文档仓库
+      link: https://github.com/anghunk/deepSeek-harness-docs
 features:
   - icon: 🧩
     title: 一切皆插件
