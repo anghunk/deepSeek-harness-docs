@@ -22,16 +22,9 @@ DeepSeek Harness 是一个承载、驱动并管理 AI 代理（Agent）的运行
 
 ## 每日自动同步
 
-本书不是静态快照：每天凌晨 **00:00** 定时任务（launchd `com.dsh.docs-sync`）自动执行：
+本书不是静态快照：每天凌晨 **00:00** 定时任务均有本地脚本（launchd `com.dsh.docs-sync`）自动执行
 
-1. **拉取**：`git fetch` 上游 `deepseek-ai/deepseek-harness` 最新提交；
-2. **增量检测**：与上次分析的提交对比，无更新则跳过（不空转）；
-3. **增量分析**：有更新时，`dsh --profile headless` 只针对变更 diff 分析影响面，增量修订相关章节，不重写全书；
-4. **变更记录**：每次同步在 [`changelog/`](changelog/) 下生成以日期命名的记录；
-5. **提交推送**：自动 `git commit` 并 `push` 到本仓库；
-6. **邮件通知**：发送每日报告（分析时间、是否有更新、分析内容、commit 等）。
-
-> 源码仓库：[deepseek-ai/deepseek-harness](https://github.com/deepseek-ai/deepseek-harness)（MIT 许可）
+> 源码仓库：[deepseek-ai/deepseek-harness](https://github.com/deepseek-ai/deepseek-harness)（MIT 许可）  
 > 本书仓库：[anghunk/deepSeek-harness-docs](https://github.com/anghunk/deepSeek-harness-docs)
 
 ## 本地预览
