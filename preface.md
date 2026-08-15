@@ -33,4 +33,4 @@ DeepSeek Harness（`dsh`）是 DeepSeek AI 开源的 Agent 运行时（agent har
 
 ## 关于本书仓库
 
-本书的 Markdown 源文件托管在 GitHub 仓库 [anghunk/deepSeek-harness-docs](https://github.com/anghunk/deepSeek-harness-docs)。发现错误、有改进建议或希望参与修订，欢迎在该仓库提交 issue 或 PR；每一页底部也提供"在 GitHub 上编辑此页"链接，可直接跳转到对应源文件。
+本书的 Markdown 源文件托管在 GitHub 仓库 [anghunk/deepseek-harness-docs](https://github.com/anghunk/deepseek-harness-docs)。发现错误、有改进建议或希望参与修订，欢迎在该仓库提交 issue 或 PR；每一页底部也提供"在 GitHub 上编辑此页"链接，可直接跳转到对应源文件。

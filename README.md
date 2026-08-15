@@ -25,7 +25,7 @@ DeepSeek Harness 是一个承载、驱动并管理 AI 代理（Agent）的运行
 本书不是静态快照：每天凌晨 **00:00** 定时任务均有本地脚本（launchd `com.dsh.docs-sync`）自动执行
 
 > 源码仓库：[deepseek-ai/deepseek-harness](https://github.com/deepseek-ai/deepseek-harness)（MIT 许可）  
-> 本书仓库：[anghunk/deepSeek-harness-docs](https://github.com/anghunk/deepSeek-harness-docs)
+> 本书仓库：[anghunk/deepseek-harness-docs](https://github.com/anghunk/deepseek-harness-docs)
 
 ## 本地预览
 

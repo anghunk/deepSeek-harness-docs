@@ -2,7 +2,7 @@
 
 ## 本书仓库
 
-- **Markdown 源文件**：<https://github.com/anghunk/deepSeek-harness-docs>
+- **Markdown 源文件**：<https://github.com/anghunk/deepseek-harness-docs>
 - 发现错误或希望参与修订，欢迎在该仓库提交 issue 或 PR。
 
 ## 官方资源

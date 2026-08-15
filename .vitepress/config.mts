@@ -109,7 +109,7 @@ export default withMermaid(
         { text: '首页', link: '/' },
         { text: '目录', link: '/preface' },
         { text: 'DeepSeek Harness 源码', link: 'https://github.com/deepseek-ai/deepseek-harness' },
-        { text: '文档仓库', link: 'https://github.com/anghunk/deepSeek-harness-docs' },
+        { text: '文档仓库', link: 'https://github.com/anghunk/deepseek-harness-docs' },
         // 默认打开最新一天的记录；无记录时回退到索引页
         { text: '变更记录', link: changelogItems.length ? changelogItems[0].link : '/changelog/' },
       ],
@@ -123,7 +123,7 @@ export default withMermaid(
       lastUpdated: { text: '更新于' },
       editLink: {
         text: '在 GitHub 上编辑此页',
-        pattern: 'https://github.com/anghunk/deepSeek-harness-docs/edit/main/:path',
+        pattern: 'https://github.com/anghunk/deepseek-harness-docs/edit/main/:path',
       },
       search: {
         provider: 'local',

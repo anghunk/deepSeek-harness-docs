@@ -13,7 +13,7 @@ hero:
       link: https://github.com/deepseek-ai/deepseek-harness
     - theme: alt
       text: 文档仓库
-      link: https://github.com/anghunk/deepSeek-harness-docs
+      link: https://github.com/anghunk/deepseek-harness-docs
 features:
   - icon: 🧩
     title: 一切皆插件
@@ -38,4 +38,4 @@ features:
 
 > 本书对应源码版本：`deepseek-harness` 仓库 `0.1.0-rc.5/rc.6`（developer preview）。项目迭代迅速，存在破坏性变更，请以最新源码为准。
 
-> 本书 Markdown 源文件托管在 GitHub：[anghunk/deepSeek-harness-docs](https://github.com/anghunk/deepSeek-harness-docs)，欢迎指正与参与修订。
+> 本书 Markdown 源文件托管在 GitHub：[anghunk/deepseek-harness-docs](https://github.com/anghunk/deepseek-harness-docs)，欢迎指正与参与修订。
