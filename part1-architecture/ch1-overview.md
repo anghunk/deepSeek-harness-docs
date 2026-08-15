@@ -12,9 +12,9 @@ DeepSeek Harness（命令行工具名为 `dsh`）是 DeepSeek AI 开发的开源
 - 它自带一个完整的 Web 图形界面（`dsh web`），同时支持无头（headless）与 ACP（Agent Client Protocol）等运行形态；
 - 它还提供子代理、目标（goal）、计划（plan）、技能（skill）、上下文压缩等进阶机制。
 
-而这一切，都建立在同一个插件框架之上：**[Cordis](https://github.com/cordiverse/cordis)**。dsh 官方这样描述自己的架构（`README.md`）：
+而这一切，都建立在同一个插件框架之上：**[Cordis](https://github.com/cordiverse/cordis)**。dsh 官方这样描述自己的架构（`README.md`，其设计参见 Cordis 设计论文 [_A Programming Paradigm for Spatiotemporal Composability_](https://github.com/cordiverse/paper)）：
 
-> It uses an architecture where **everything is a plugin**, and is powered by Cordis.
+> It uses an architecture where **everything is a plugin**, and is powered by [Cordis](https://github.com/cordiverse/cordis), whose design is described in [_A Programming Paradigm for Spatiotemporal Composability_](https://github.com/cordiverse/paper).
 
 "一切皆插件"——包括模型适配器、工具注册表、会话日志，甚至 Agent 循环本身（`docs/architecture.md`）：
 
@@ -69,6 +69,7 @@ pnpm run demo:acp
 ## 1.4 版本状态与生态
 
 - **开发者预览**：项目处于快速迭代期，官方明确声明存在破坏性变更；
+- **npm 公开发布**：`@deepseek-ai/*` 包族自 `0.1.0-rc.3` 起以 `public` 访问级别公开发布到 npm（当前 `0.1.0-rc.5`），`npx @deepseek-ai/dsh web` 即可直接使用；
 - **社区**：GitHub Discussions、Discord 社区；
 - **插件生态**：官方建议插件仓库添加 `dsh-plugin` topic 以便被发现；
 - **上游**：Cordis 框架（vendor 目录内嵌）与 Cosmokit 工具库。
