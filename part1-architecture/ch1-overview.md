@@ -69,7 +69,7 @@ pnpm run demo:acp
 ## 1.4 版本状态与生态
 
 - **开发者预览**：项目处于快速迭代期，官方明确声明存在破坏性变更；
-- **npm 公开发布**：`@deepseek-ai/*` 包族自 `0.1.0-rc.3` 起以 `public` 访问级别公开发布到 npm（当前 `0.1.0-rc.5`），`npx @deepseek-ai/dsh web` 即可直接使用；
+- **npm 公开发布**：`@deepseek-ai/*` 包族自 `0.1.0-rc.5` 起以 `public` 访问级别公开发布到 npm（`0.1.0-rc.3` 及更早版本均为 `restricted` 受限发布），`npx @deepseek-ai/dsh web` 即可直接使用；
 - **社区**：GitHub Discussions、Discord 社区；
 - **插件生态**：官方建议插件仓库添加 `dsh-plugin` topic 以便被发现；
 - **上游**：Cordis 框架（vendor 目录内嵌）与 Cosmokit 工具库。

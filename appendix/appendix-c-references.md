@@ -10,7 +10,7 @@
 - **仓库**：<https://github.com/deepseek-ai/deepseek-harness>
 - **Cordis 框架**：<https://github.com/cordiverse/cordis>
 - **Cordis 设计论文**（*A Programming Paradigm for Spatiotemporal Composability*）：<https://github.com/cordiverse/paper>
-- **npm 包**：`@deepseek-ai/dsh`（`npx @deepseek-ai/dsh web`；`@deepseek-ai/*` 包族自 `0.1.0-rc.3` 起以 `public` 公开发布，当前 `0.1.0-rc.5`）
+- **npm 包**：`@deepseek-ai/dsh`（`npx @deepseek-ai/dsh web`；`@deepseek-ai/*` 包族自 `0.1.0-rc.5` 起以 `public` 公开发布，当前 `0.1.0-rc.5`）
 - **讨论区**：<https://github.com/deepseek-ai/deepseek-harness/discussions>
 - **Discord**：<https://discord.gg/Ycq5dCaS4>
 - **插件发现**：GitHub topic [`dsh-plugin`](https://github.com/topics/dsh-plugin)
