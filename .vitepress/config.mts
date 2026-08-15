@@ -1,7 +1,22 @@
 import { defineConfig } from 'vitepress'
 import { withMermaid } from 'vitepress-plugin-mermaid'
+import { fileURLToPath } from 'node:url'
+import path from 'node:path'
+import fs from 'node:fs'
 
 const guide = 'DeepSeek Harness'
+
+// 变更记录：扫描 changelog/ 下以日期命名（YYYY-MM-DD.md）的文件，
+// 日期倒序（最新在前）；非日期命名 / 无标题的文件不显示
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const changelogDir = path.join(__dirname, '../changelog')
+const changelogItems = fs.existsSync(changelogDir)
+  ? fs.readdirSync(changelogDir)
+      .filter((f) => /^\d{4}-\d{2}-\d{2}\.md$/.test(f))
+      .sort()
+      .reverse()
+      .map((f) => ({ text: f.replace(/\.md$/, ''), link: `/changelog/${f.replace(/\.md$/, '')}` }))
+  : []
 
 const sidebar = [
   {
@@ -64,6 +79,13 @@ const sidebar = [
       { text: '附录 C 参考资源', link: '/appendix/appendix-c-references' },
     ],
   },
+  {
+    text: '变更记录',
+    items: [
+      { text: '变更记录索引', link: '/changelog/' },
+      ...changelogItems,
+    ],
+  },
 ]
 
 export default withMermaid(
@@ -81,6 +103,7 @@ export default withMermaid(
       nav: [
         { text: '首页', link: '/' },
         { text: '目录', link: '/preface' },
+        { text: '变更记录', link: '/changelog/' },
         { text: 'DeepSeek Harness 源码', link: 'https://github.com/deepseek-ai/deepseek-harness' },
         { text: '文档仓库', link: 'https://github.com/anghunk/deepSeek-harness-docs' },
       ],
