@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<body style="margin:0;padding:0;background:#f5f6f8;font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f5f6f8;padding:24px 0;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:8px;overflow:hidden;border:1px solid #e3e6eb;">
+          <!-- 头部 -->
+          <tr>
+            <td style="background:#4d6bfe;padding:20px 28px;">
+              <div style="color:#ffffff;font-size:18px;font-weight:600;">🔔 DSH 文档同步 · 每日报告</div>
+              <div style="color:#c9d4ff;font-size:12px;margin-top:4px;">DeepSeek Harness 上游源码 → 解析文档自动同步</div>
+            </td>
+          </tr>
+          <!-- 概览 -->
+          <tr>
+            <td style="padding:24px 28px 8px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f8f9fc;border-radius:6px;border:1px solid #eef0f5;">
+                <tr>
+                  <td style="padding:14px 18px;width:33%;">
+                    <div style="font-size:12px;color:#8a90a0;">分析时间</div>
+                    <div style="font-size:15px;font-weight:600;margin-top:4px;">{{SYNC_TIME}}</div>
+                  </td>
+                  <td style="padding:14px 18px;width:33%;border-left:1px solid #eef0f5;">
+                    <div style="font-size:12px;color:#8a90a0;">上游是否有更新</div>
+                    <div style="font-size:15px;font-weight:600;margin-top:4px;">{{HAS_UPDATE}}</div>
+                  </td>
+                  <td style="padding:14px 18px;width:34%;border-left:1px solid #eef0f5;">
+                    <div style="font-size:12px;color:#8a90a0;">本次是否产生新分析</div>
+                    <div style="font-size:15px;font-weight:600;margin-top:4px;">{{HAS_ANALYSIS}}</div>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <!-- 更新范围 -->
+          <tr>
+            <td style="padding:16px 28px 0;">
+              <div style="font-size:13px;color:#555b6b;">📥 上游更新范围（{{RANGE}}）</div>
+              <div style="font-size:13px;color:#555b6b;margin-top:6px;background:#f8f9fc;border:1px solid #eef0f5;border-radius:6px;padding:10px 14px;line-height:1.7;">
+                {{COMMITS_LIST}}
+              </div>
+            </td>
+          </tr>
+          <!-- 分析内容 -->
+          <tr>
+            <td style="padding:16px 28px 0;">
+              <div style="font-size:13px;color:#555b6b;">📌 主要更新并分析的内容</div>
+              <div style="font-size:13px;color:#333847;margin-top:6px;line-height:1.8;">
+                {{ANALYSIS_SUMMARY}}
+              </div>
+            </td>
+          </tr>
+          <!-- 文档变更 -->
+          <tr>
+            <td style="padding:16px 28px 0;">
+              <div style="font-size:13px;color:#555b6b;">📝 文档变更明细</div>
+              <div style="font-size:13px;color:#333847;margin-top:6px;line-height:1.8;background:#f8f9fc;border:1px solid #eef0f5;border-radius:6px;padding:10px 14px;">
+                {{DOC_CHANGES}}
+              </div>
+            </td>
+          </tr>
+          <!-- GitHub 提交 -->
+          <tr>
+            <td style="padding:16px 28px 24px;">
+              <div style="font-size:13px;color:#555b6b;">🔗 GitHub 提交</div>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:6px;background:#f8f9fc;border:1px solid #eef0f5;border-radius:6px;">
+                <tr>
+                  <td style="padding:10px 14px;font-size:13px;color:#555b6b;width:90px;">是否提交</td>
+                  <td style="padding:10px 14px;font-size:13px;color:#333847;font-weight:600;">{{COMMITTED}}</td>
+                </tr>
+                <tr>
+                  <td style="padding:10px 14px;font-size:13px;color:#555b6b;width:90px;border-top:1px solid #eef0f5;">是否推送</td>
+                  <td style="padding:10px 14px;font-size:13px;color:#333847;font-weight:600;border-top:1px solid #eef0f5;">{{PUSHED}}</td>
+                </tr>
+                <tr>
+                  <td style="padding:10px 14px;font-size:13px;color:#555b6b;width:90px;border-top:1px solid #eef0f5;">Commit</td>
+                  <td style="padding:10px 14px;border-top:1px solid #eef0f5;">
+                    <span style="font-family:Menlo,Consolas,monospace;font-size:12px;background:#eef0f5;border-radius:4px;padding:2px 6px;color:#4d6bfe;">{{COMMIT_SHA}}</span>
+                    <span style="font-size:12px;color:#8a90a0;margin-left:6px;">{{COMMIT_MSG}}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:10px 14px;font-size:13px;color:#555b6b;width:90px;border-top:1px solid #eef0f5;">仓库</td>
+                  <td style="padding:10px 14px;font-size:13px;color:#333847;border-top:1px solid #eef0f5;">anghunk/deepSeek-harness-docs</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <!-- 底部 -->
+          <tr>
+            <td style="background:#f8f9fc;padding:14px 28px;border-top:1px solid #eef0f5;">
+              <div style="font-size:12px;color:#8a90a0;line-height:1.7;">
+                本邮件由定时任务（com.dsh.docs-sync，每日 00:00）自动生成 · 源码仓库：deepseek-ai/deepseek-harness<br/>
+                详情可查看 <span style="font-family:Menlo,Consolas,monospace;">docs/changelog/</span> 变更记录
+              </div>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
