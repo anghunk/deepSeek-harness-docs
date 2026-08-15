@@ -101,9 +101,10 @@ export default withMermaid(
     lastUpdated: true,
     head: [
       ['meta', { name: 'theme-color', content: '#4d6bfe' }],
+      ['link', { rel: 'icon', href: '/ds-logo.svg', type: 'image/svg+xml' }],
     ],
     themeConfig: {
-      logo: '/dsh-logo.svg',
+      logo: '/ds-logo.svg',
       nav: [
         { text: '首页', link: '/' },
         { text: '目录', link: '/preface' },
