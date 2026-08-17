@@ -96,6 +96,17 @@ return {
 
 真实案例（`dsh-market` 插件商店）：客户端 bundle 手工编写（无构建步骤），`settings.section` 注册"插件市场"页，三个标签页（官方/社区/已安装），安装/卸载/更新操作带进度条与结果横幅，全部使用 `--dsw-alias-*` 主题变量。
 
+**给插件自己开一张配置卡（`settings.plugin.item`，0.1.0-rc.7+）**：注册了 settings 命名空间的插件现在**天然出现在设置页**——api-proxy 服务每一个已注册命名空间（`WEB_SETTINGS_NAMESPACES`/`PRODUCT_SETTINGS_NAMESPACES` 白名单与 `settings-not-exposed` 错误码已删除），「插件」分区的 `configurable` 标签页声明 `settings.plugin.item`（**keyed，键 = 卡片所编辑的命名空间**）并按 `settings.describe` 返回的命名空间派发。浏览器半侧注册卡片：
+
+```ts
+ctx.slots.inject('settings.plugin.item', () => ctx.slots.register(
+  { name: 'settings.plugin.item', key: '<你的 settings 命名空间>' },   // key，不是 id/order
+  (props) => React.createElement('div', null, '我的插件配置'),
+))
+```
+
+卡片外观、控件与文案全部由插件自己拥有（标签页不提供兜底表单）；卡片按注册顺序排列。Host 半注册命名空间 + 浏览器半把卡片注册在该键上，两者配对即出现在设置页——**仓库外分发的插件同样适用**，无需改动仓库。完整的可配置插件 = Host 注册 `ctx.settings.register(...)` 命名空间 + `dsh.client` 半注册上述 keyed 卡片。
+
 ## 19.5 模式五：Host↔Client 包私有 RPC
 
 Host 注册处理器，Client 调用——**只走 JSON**：

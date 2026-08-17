@@ -86,6 +86,8 @@ interface WebBootEntry {
 - **生命周期**：disposer 移除贡献并递归 collapse 声明的子 slot；`slots.inject` 等待 slot 声明生命周期（声明已存在 → 同步跑回调，否则声明提交后跑，collapse 时 dispose）；
 - **inject 面**：`inject: (...args) => Record<string, unknown>` 为注册者业务面；业务数据走 apply 闭包 ctx，不存在 binding 对象参数。
 
+**keyed slot 的典型用例**：设置页「插件」分区的 `configurable` 标签页声明 `settings.plugin.item`（`{ kind: 'keyed', scope: 'root' }`），**键 = 卡片所编辑的 settings 命名空间**（声明 `key` 而非 `id`/`order`）。`0.1.0-rc.7` 起 api-proxy **服务每一个已注册命名空间**（不再有 `WEB_SETTINGS_NAMESPACES`/`PRODUCT_SETTINGS_NAMESPACES` 白名单），标签页以 `settings.describe` 返回的命名空间驱动派发——渲染结果是"存活 Host 插件注册的命名空间 × 注册在这些键上的卡片"两份账本的交集，缺席即无卡片。插件作者在 Host 注册命名空间 + 在浏览器把卡片注册在该键上，仓库外分发的插件也能出现在设置页（第 19 章 19.4 有注册示例）。
+
 ### 作用域标准 props
 
 框架注入的标准 props 由多个包声明合并合成：

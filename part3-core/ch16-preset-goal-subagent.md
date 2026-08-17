@@ -78,11 +78,13 @@ apps/cli/config/agent-presets/     # 部署交付的 preset（standard、code、
 | Provider | 形态 |
 | --- | --- |
 | `fork-in-process` / `spawn-in-process` / `in-process-driver` | 进程内子代理（同步 setup 内 composeFrom 父组合） |
-| `subagent-acp` | ACP（Agent Client Protocol）代理 |
-| `subagent-claude-code` / `subagent-codex` | 外部产品委托 |
+| `subagent-acp` | ACP（Agent Client Protocol）代理（自动化传输层，支持成对的文本/图片提示与回答） |
+| `subagent-claude-code` / `subagent-codex` | 外部产品委托（一次性任务，见下） |
 | `subagent-dsh-sdk` | SDK 驱动 |
 
 消费者是 `tool-subagent` 系列工具（`subagent`、`subagent_report` 等）。接缝语义：**从全新子 agent 到委托给另一产品的 turn**，Provider 变化同样广泛——这正是"可替换接缝"的极致体现。子代理注册表是进程单例（provider 名只能注册一次），因此留 host-plane。
+
+**产品提供方的可选安装（0.1.0-rc.7 起）**：生产 `dsh-base` **不再**依赖或挂载 `codex` / `claude-code` 两个可选提供方（安装排除决策）。选择产品集成的 Profile 需显式安装 `dsh-subagent-codex` / `dsh-subagent-claude-code`（或两者）并在 host plane 各挂载一次；加载仍只注册休眠后端，产品进程到第一次实际委派才启动。`standard` / `code` / `cordis` Agent Preset 中对应的工具行以 `backgroundMode: 'one-shot'` 声明：删除行的 `disabled` 字段后，可选参数 `run_in_background` 对由该 preset 组装的 agent 公开——省略或 `false` 在前台等待最终回答；显式 `true` 则经同步 Job 预检与登记后返回父级拥有的 Job id（由通用 `ctx.jobs` / `dsh-tool-jobs` 负责收集、取消与完成通知，见第 15 章），不新增任何产品专属后台状态。
 
 ## 16.4 plan / skill / compaction / spill
 
@@ -118,7 +120,7 @@ compaction 是**三维能力缝**（`compaction/compaction` 定义，`compaction
 
 - preset 是会话层组装：每进程一份 standing mount、文件戳换代、mount 审计（inactive rows / leaked services）、isolate realm 是正确性地基；
 - goal 是同会话事件溯源目标：CAS 变更、phase 与 activation 分离、轮次驱动经 agent/inject 续跑；
-- subagent 是接缝：进程内/ACP/外部产品多种 provider，注册表留 host-plane；
+- subagent 是接缝：进程内/ACP/外部产品多种 provider，注册表留 host-plane；产品提供方按 Profile 显式安装，`backgroundMode: 'one-shot'` 让同一运行可前台收集或走通用 Job 后台；
 - plan（`ctx.planMode`）与 skill（`ctx.skills`）的命名与机制都和直觉不同，读代码时注意；
 - compaction 用 surface replace 压缩；spill 把大内容溢出到文件。
 

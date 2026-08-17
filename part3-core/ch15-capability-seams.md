@@ -12,10 +12,10 @@
 | `ctx.subprocess` | seam | `packages/subprocess/subprocess` | `subprocess-local`、`subprocess-e2b` | `bash-*`、LSP、子代理 |
 | `ctx.shell` | seam | `packages/shell/shell` | `bash-local`、`bash-sandbox`、`pwsh-local` | `tool-bash` |
 | `ctx.terminals` | seam | `packages/terminal/terminal` | `terminal-bash` | `tool-terminal` |
-| `ctx.jobs` | seam | `packages/jobs/jobs` | `jobs-local` | `tool-jobs`、`tool-bash`(bg) |
+| `ctx.jobs` | seam | `packages/jobs/jobs` | `jobs-local` | `tool-jobs`、`tool-bash`(bg)、`tool-subagent`(one-shot bg) |
 | `ctx.codeRuntime` | seam | `packages/code-runtime/code-runtime` | `code-runtime-worker` | Code Mode |
 | `ctx.storage` | seam | `packages/storage/storage` | `storage-json`、`storage-sqlite` | 各持久化域 |
-| `ctx.attachments` / `ctx.credentials` | seam | `attachment` / `credentials` | `attachment-local` / `credentials-local` | LLM 适配器 |
+| `ctx.attachments` / `ctx.credentials` | seam | `attachment` / `credentials` | `attachment-local` / `credentials-local` | LLM 适配器、Web/ACP/MCP 图片入口、Code Mode |
 | `ctx.approval` | seam | `interaction/user-approval` | `acp`(桥) | `tools`、`tool-bash`、`tool-fs` |
 
 **接缝语义设计核心**：多个同族 Provider（本地/沙箱/远程 e2b）通过"一次只装一个对应 ctx 服务的实现"热切换，工具层与策略层不感知后端差异——这是全书最值得强调的架构主线之一。
@@ -125,14 +125,14 @@ PLATFORM_CHAINS = { linux: ['bwrap','landlock'], darwin: ['seatbelt'], win32: ['
 
 ## 15.7 后台作业：ctx.jobs
 
-`JobRegistry`（`packages/jobs/jobs`）：`start({ kind, label, owner, run })` 注册长任务；返回 `JobId`；配套通用控制工具 `job_kill`/`job_list`/`job_output`；完成经 `agent/*` 事件通知；`tool-bash` 的 `run_in_background` 与终端 `pty-send` 都走它。任务生命周期（发布后）归 `job_kill`/所有者销毁，不再归 `exec.signal`（第 19 章）。
+`JobRegistry`（`packages/jobs/jobs`）：`start({ kind, label, owner, run })` 注册长任务；返回 `JobId`；配套通用控制工具 `job_kill`/`job_list`/`job_output`；完成经 `agent/*` 事件通知；`tool-bash` 的 `run_in_background`、终端 `pty-send` 与产品 subagent 的 one-shot 后台运行（`backgroundMode: 'one-shot'`，第 16 章）都走它。任务生命周期（发布后）归 `job_kill`/所有者销毁，不再归 `exec.signal`（第 19 章）。
 
 > **事件纠错**：不存在 `jobs/*` 事件——jobs 用 `onJobDone`/`onJobsChanged` 监听器而非 Cordis 事件；也不存在 `tool/start`、`tool/error` 事件——工具的生命周期事实就是会话事件 `tool/call` + `tool/result`（`tools/result` 是只读观察、`tools/change` 是注册表脏标记）。另外 `tool-fs` 的工具名是裸的 `read`/`write`/`edit`/`read_image`（没有 `ws_*` 前缀），且 write 路径不调 `ctx.fs.stat`——存在性检查由 fs provider 内部的 probe 守卫完成。
 
 ## 15.8 其他接缝速览
 
 - **`ctx.storage`**：键值存储 seam（`storage-json`/`storage-sqlite`），`storageDomain` 分域；
-- **`ctx.attachments`**：附件引用（只读位图等，`ImageAttachmentRef`）；
+- **`ctx.attachments`**：附件 seam（`attachment` 定义 / `attachment-local` 内容寻址实现）。角色无关的 `ImageBlock` 只携带**引用**（`ImageAttachmentRef`），base64 绝不进会话事件。`0.1.0-rc.7` 起提供**批次准入** `saveImages(inputs)`：由接缝统一持有图片数量/总字节/单张字节/完整解码 MIME 校验/尺寸/像素数等限制，**先校验全部成员再写任何成员**、按序提交，整批成功才返回引用——失败不返回部分引用。Web 上传、ACP 内联图片与 MCP 图片投影都经这条共享入口（各入口先自证"确切路由支持图片输入"，再委托 `saveImages`）；Code Mode 把含图片的已结算子结果经外层 `run_code` 结果延后为带来源归属的上下文；
 - **`ctx.credentials`**：凭据 seam（`credentials-local`），LLM 适配器读取 API key；
 - **`ctx.codeRuntime`**：Code Mode 的代码执行运行时（worker thread）。
 
