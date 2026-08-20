@@ -53,7 +53,7 @@ interface WebBootEntry {
 
 ### 客户端模块系统
 
-执行插件 bundle 只**注册 factory**（`window.__ModuleLoader__.load({ id, factory })`），bundle body 副作用（含 CSS 注入）在 factory 闭包内、materialization 时才跑。`require` 走注册表查找，**无 load 分支**（跨插件 value import 是构建错误）；`seed.ts` 用 `satisfies` 把 `PLATFORM_MODULES`（react/cordis/ui-slots/web-react/ui-primitives/ui-attachment/schema-form）钉死——漏一个静态 import 编译即失败。
+执行插件 bundle 只**注册 factory**（`window.__ModuleLoader__.load({ id, factory })`），bundle body 副作用（含 CSS 注入）在 factory 闭包内、materialization 时才跑。`require` 走注册表查找，**无 load 分支**（跨插件 value import 是构建错误）；`seed.ts` 用 `satisfies` 把 `PLATFORM_MODULES`（react/cordis/ui-slots/ui-primitives/ui-renderer/ui-attachment/schema-form）钉死——漏一个静态 import 编译即失败。
 
 ## 17.5 连接 Host：双向异质通道
 
@@ -75,7 +75,7 @@ interface WebBootEntry {
 
 ## 17.7 Slot 系统
 
-三层解耦：纯核心 `ui-slots`（零运行时依赖）→ Service 层 `ctx.slots`（`runtime/src/client/slots.ts`）→ 渲染器 `web-react/src/scoped-slots.tsx`。
+三层解耦：纯核心 `ui-slots`（零运行时依赖）→ Service 层 `ctx.slots`（`runtime/src/client/slots.ts`）→ 渲染器 `ui-renderer`（`packages/client/ui-renderer`）。
 
 ### 注册协议
 

@@ -33,7 +33,9 @@ function allPatches(composed) {
 
 **后层覆盖前层**：用户级 patch 可以覆盖 bundle 插入的任何行；`--patch` 又可以覆盖用户级。
 
-### 三种内置 Bundle
+### 默认 Profile 模板使用的 Bundle
+
+默认 Profile 模板使用的组合包：
 
 | Bundle | 作用 |
 | --- | --- |

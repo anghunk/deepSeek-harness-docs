@@ -31,7 +31,7 @@ switch (invocation.mode) {
 
 `loadLayeredEnv`（`app-boot/index.ts:177-198`）按"继承进程环境 > 调用目录 `.env` > Harness 主目录 `.env`"三层收集环境，生成不可变快照 `LaunchEnvironmentSnapshot`（记录每个值的来源层），并**只填充未设置**的变量。
 
-这里有一个精心设计的安全约束：`BOOTSTRAP_NAMES` 与 `BOOTSTRAP_PREFIXES`（`index.ts:92-128`）列出的变量**禁止任何 `.env` 文件设置**——包括 `PATH`/`HOME`/`NODE_OPTIONS`、所有解释器钩子（`PYTHONPATH`、`RUBYOPT`…）、VCS 钩子、网络信任（`HTTP_PROXY`、`SSL_CERT_FILE`…），以及 `DSH_`/`XDG_`/`DYLD_` 前缀。理由（注释原文）：
+这里有一个精心设计的安全约束：`BOOTSTRAP_NAMES` 与 `BOOTSTRAP_PREFIXES`（`index.ts:92-128`）列出的变量**禁止任何 `.env` 文件设置**——包括 `PATH`/`HOME`/`NODE_OPTIONS`、决定由哪个环境程序处理一项操作的（`EDITOR`、`PAGER`、`BROWSER`）、所有解释器钩子（`PYTHONPATH`、`RUBYOPT`…）、VCS 钩子、网络信任（`HTTP_PROXY`、`SSL_CERT_FILE`…），以及 `DSH_`/`XDG_`/`DYLD_` 前缀。理由（注释原文）：
 
 > it decides how this process starts, where its code and instructions load from, or how it reaches the network
 

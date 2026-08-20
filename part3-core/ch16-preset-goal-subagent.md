@@ -84,7 +84,7 @@ apps/cli/config/agent-presets/     # 部署交付的 preset（standard、code、
 
 消费者是 `tool-subagent` 系列工具（`subagent`、`subagent_report` 等）。接缝语义：**从全新子 agent 到委托给另一产品的 turn**，Provider 变化同样广泛——这正是"可替换接缝"的极致体现。子代理注册表是进程单例（provider 名只能注册一次），因此留 host-plane。
 
-**产品提供方的可选安装（0.1.0-rc.7 起）**：生产 `dsh-base` **不再**依赖或挂载 `codex` / `claude-code` 两个可选提供方（安装排除决策）。选择产品集成的 Profile 需显式安装 `dsh-subagent-codex` / `dsh-subagent-claude-code`（或两者）并在 host plane 各挂载一次；加载仍只注册休眠后端，产品进程到第一次实际委派才启动。`standard` / `code` / `cordis` Agent Preset 中对应的工具行以 `backgroundMode: 'one-shot'` 声明：删除行的 `disabled` 字段后，可选参数 `run_in_background` 对由该 preset 组装的 agent 公开——省略或 `false` 在前台等待最终回答；显式 `true` 则经同步 Job 预检与登记后返回父级拥有的 Job id（由通用 `ctx.jobs` / `dsh-tool-jobs` 负责收集、取消与完成通知，见第 15 章），不新增任何产品专属后台状态。
+**产品提供方的可选安装（0.1.0-rc.7 起）**：生产 `dsh-base` **不再**依赖或挂载 `codex` / `claude-code` 两个可选提供方（安装排除决策）。选择产品集成的 Profile 需显式安装对应的提供方 Bundle（`dsh-subagent-codex` / `dsh-subagent-claude-code`）；其 patch 挂载默认实例，而 Profile 可在 host plane 挂载更多命名实例。两个产品都接受多个唯一的 `providerName` 值，同时保留 `codex` 与 `claude-code` 作为默认值。加载任一插件只注册休眠后端，产品进程到第一次实际委派才启动。每个 Bundle 把可执行文件选择交给包自有的产品运行时：Codex 包运行自身声明的 wrapper，Claude Code 包让锁定的 Agent SDK 选择私有原生可执行文件；两个提供方都不查询或回退宿主产品命令。Agent Preset 通过普通 `dsh-tool-subagent` 配置项的 `provider` 与 `toolName` 准确公开单个 agent 所需的已配置实例，而无需更改 Host 注册表。`standard` / `code` / `cordis` Agent Preset 中对应的工具行以 `backgroundMode: 'one-shot'` 声明：删除行的 `disabled` 字段后，可选参数 `run_in_background` 对由该 preset 组装的 agent 公开——省略或 `false` 在前台等待最终回答；显式 `true` 则经同步 Job 预检与登记后返回父级拥有的 Job id（由通用 `ctx.jobs` / `dsh-tool-jobs` 负责收集、取消与完成通知，见第 15 章），不新增任何产品专属后台状态。
 
 ## 16.4 plan / skill / compaction / spill
 
