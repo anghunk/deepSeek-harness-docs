@@ -128,7 +128,7 @@ abstract class LlmAdapter {
 
 `packages/llm/` 下还有：
 
-- `llm-deepseek`：DeepSeek 官方适配器（reasoning effort 支持 `off` / `low` / `high` / `max`，默认 `high`；`low` 为 `0.1.0-rc.7` 新增级别，仅 `low`/`high`/`max` 会带上官方协议强度值，`off` 映射为 `thinking: disabled`）；
+- `llm-deepseek`：DeepSeek 官方适配器（reasoning effort 支持 `off` / `low` / `high` / `max`，默认 `high`；`low` 为 `0.1.0-rc.7` 新增级别，仅 `low`/`high`/`max` 会带上官方协议强度值，`off` 映射为 `thinking: disabled`）；`0.1.1-rc.1` 起发布视觉模型目录，默认包含 V4 Flash / V4 Pro / V4 Flash Vision Exp（`inputModalities: ['text', 'image']`），支持多模态图像输入；
 - `llm-pi-ai`：Pi AI 适配器；
 - `llm-retry`：重试策略实现；
 - `token-meter`：token 计量。

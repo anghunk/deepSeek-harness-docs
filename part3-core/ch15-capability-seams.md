@@ -132,7 +132,7 @@ PLATFORM_CHAINS = { linux: ['bwrap','landlock'], darwin: ['seatbelt'], win32: ['
 ## 15.8 其他接缝速览
 
 - **`ctx.storage`**：键值存储 seam（`storage-json`/`storage-sqlite`），`storageDomain` 分域；
-- **`ctx.attachments`**：附件 seam（`attachment` 定义 / `attachment-local` 内容寻址实现）。角色无关的 `ImageBlock` 只携带**引用**（`ImageAttachmentRef`），base64 绝不进会话事件。`0.1.0-rc.7` 起提供**批次准入** `saveImages(inputs)`：由接缝统一持有图片数量/总字节/单张字节/完整解码 MIME 校验/尺寸/像素数等限制，**先校验全部成员再写任何成员**、按序提交，整批成功才返回引用——失败不返回部分引用。Web 上传、ACP 内联图片与 MCP 图片投影都经这条共享入口（各入口先自证"确切路由支持图片输入"，再委托 `saveImages`）；Code Mode 把含图片的已结算子结果经外层 `run_code` 结果延后为带来源归属的上下文；
+  - **`ctx.attachments`**：附件 seam（`attachment` 定义 / `attachment-local` 内容寻址实现）。角色无关的 `ImageBlock` 只携带**引用**（`ImageAttachmentRef`），base64 绝不进会话事件。`0.1.0-rc.7` 起提供**批次准入** `saveImages(inputs)`：由接缝统一持有图片数量/总字节/单张字节/完整解码 MIME 校验/尺寸/像素数等限制，**先校验全部成员再写任何成员**、按序提交，整批成功才返回引用——失败不返回部分引用。Web 上传、ACP 内联图片与 MCP 图片投影都经这条共享入口（各入口先自证"确切路由支持图片输入"，再委托 `saveImages`）；Code Mode 把含图片的已结算子结果经外层 `run_code` 结果延后为带来源归属的上下文。`0.1.1-rc.2` 起，图片准入采用**宽源信封**（32MiB / 100MP / 单边 16384px）配合**确定性规范编码**：准入不再直接拒绝大源，而是持久化一份规范编码——EXIF 方向烘焙进像素、元数据剥离、长边按部署配置的规范目标缩放（默认 2048px）；PNG 调色板用于 alpha/PNG/GIF 源，JPEG 源走固定质量阶梯（85/75/60/45）直到字节目标（默认 1MiB）满足；预算内的 PNG/JPEG/WebP 逐字节透传以保证相同源去重到同一内容地址，GIF 始终重编码为 PNG 第一帧以固定"第一帧"语义。`read_image` 工具在存储发生缩放时额外在输出信封中报告原始尺寸（`sourceWidth`/`sourceHeight`）与坐标缩放因子，供程序化消费方将附图中测量的坐标映射回原始文件；
 - **`ctx.credentials`**：凭据 seam（`credentials-local`），LLM 适配器读取 API key；
 - **`ctx.codeRuntime`**：Code Mode 的代码执行运行时（worker thread）。
 
