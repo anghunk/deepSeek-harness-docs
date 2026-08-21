@@ -3,5 +3,3 @@ node_modules
 .vitepress/dist
 .vitepress/cache
 .dsh-vision-toolkit/
-
-package-lock.json
