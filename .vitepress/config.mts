@@ -98,7 +98,7 @@ export default withMermaid(
     title: guide,
     description: 'DeepSeek Harness 源码解析指南：从 Cordis 框架到核心子系统，再到插件开发技巧',
     cleanUrls: true,
-    lastUpdated: true,
+    lastUpdated: false,
     head: [
       ['meta', { name: 'theme-color', content: '#4d6bfe' }],
       ['link', { rel: 'icon', href: '/ds-logo.svg', type: 'image/svg+xml' }],
