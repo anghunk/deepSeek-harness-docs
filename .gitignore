@@ -5,3 +5,7 @@ node_modules
 .dsh-vision-toolkit/
 
 package-lock.json
+
+# 本地文档，不同步到远程仓库
+LASTUPDATED-ISSUE.md
+SYNC-LOGIC-REFERENCE.md
